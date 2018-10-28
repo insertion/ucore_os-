@@ -1,9 +1,10 @@
 
 all:
 	nasm boot/bootstrap.asm -f bin -o boot.bin
-	dd if=boot.bin of=floppy.img
+	dd if=boot.bin of=boot.vfd conv=notrunc
+#	ls -al
 clean:
-	rm *.bin
+	rm -f *.bin
 qemu:
 	qemu-system-x86_64 -nographic -s -S -drive format=raw,file=floppy.img
 debug:
